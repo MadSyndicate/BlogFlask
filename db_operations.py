@@ -13,6 +13,29 @@ def get_all_blogs():
         return json.load(json_file)
 
 
+def fetch_post_by_id(post_id):
+    current_collection = get_all_blogs()
+    fetched_post = [p for p in current_collection if p.get('id') == post_id]
+    if len(fetched_post) == 1:
+        return fetched_post[0]
+    elif len(fetched_post) == 0:
+        return None
+    else:
+        raise Exception("More then one blog post found")
+
+
+def update_post(post_id, author, title, content):
+    current_collection = get_all_blogs()
+    for post in current_collection:
+        if post.get('id') == post_id:
+            post['author'] = author
+            post['title'] = title
+            post['content'] = content
+    save_to_db(current_collection)
+    return post_id
+
+
+
 def post_blog(post):
     current_collection = get_all_blogs()
     current_max_id_post = max(current_collection, key=lambda x: x['id'])

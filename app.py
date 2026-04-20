@@ -30,6 +30,30 @@ def add():
     return render_template('add.html')
 
 
+@app.route('/update/<int:post_id>', methods=['GET', 'POST'])
+def update(post_id):
+    # Fetch the blog posts from the JSON file
+    post = db_operations.fetch_post_by_id(post_id)
+    if post is None:
+        # Post not found
+        return "Post not found", 404
+
+    if request.method == 'POST':
+    # Update the post in the JSON file
+    # Redirect back to index
+
+        upd_author = request.form.get('author')
+        upd_title = request.form.get('title')
+        upd_content = request.form.get('content')
+        result = db_operations.update_post(post_id, upd_author, upd_title, upd_content)
+        print(f'Updated blog_post with id "{result}".')
+        return redirect(url_for('index'))
+
+    # Else, it's a GET request
+    # So display the update.html page
+    return render_template('update.html', post=post)
+
+
 @app.route('/delete/<int:post_id>')
 def delete(post_id):
     # Find the blog post with the given id and remove it from the list
