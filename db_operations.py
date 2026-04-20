@@ -21,3 +21,9 @@ def post_blog(post):
     current_collection.append(post)
     save_to_db(current_collection)
     return new_post_id
+
+
+def delete_post(post_id):
+    current_collection = get_all_blogs()
+    new_collection = [p for p in current_collection if p.get('id') != post_id]
+    save_to_db(new_collection)

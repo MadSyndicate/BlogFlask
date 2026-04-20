@@ -9,12 +9,18 @@
 <body>
     <h1>Welcome to My Flask Blog!</h1>
     <a class="crud-ref" href="/add">Add new Blog Post...</a>
+
     {% for post in posts %}
         <div class="post">
             <h2>{{post['title']}}</h2>
             <p><em>{{post['author']}}</em></p>
             <p>{{post['content']}}</p>
+            <a href="{{ url_for('delete', post_id=post['id']) }}">
+            Delete Post
+            </a>
         </div>
+    {% else %}
+        <h1>Start posting right away. Right now we don't have any posts.</h1>
     {% endfor %}
 </body>
 </html>
