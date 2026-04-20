@@ -8,8 +8,9 @@
 </head>
 <body>
     <h1>Welcome to My Flask Blog!</h1>
-    <a class="crud-ref" href="/add">Add new Blog Post...</a>
-
+    <form action="{{ url_for('add') }}" method="get">
+        <button class="post-new" type="submit">Add new Blog Post...</button>
+    </form>
     {% for post in posts %}
         <div class="post">
             <h2>{{post['title']}}</h2>
@@ -17,6 +18,9 @@
             <p>{{post['content']}}</p>
             <form action="{{ url_for('update', post_id=post.id) }}" method="get">
                 <button type="submit">Update Post</button>
+            </form>
+            <form action="{{ url_for('delete', post_id=post.id) }}" method="post">
+                <button type="submit">Delete Post</button>
             </form>
             <a href="{{ url_for('delete', post_id=post['id']) }}">
                 Delete Post

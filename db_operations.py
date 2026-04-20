@@ -38,8 +38,12 @@ def update_post(post_id, author, title, content):
 
 def post_blog(post):
     current_collection = get_all_blogs()
-    current_max_id_post = max(current_collection, key=lambda x: x['id'])
-    new_post_id = current_max_id_post['id'] + 1
+    new_post_id = -1
+    if len(current_collection) == 0:
+        new_post_id = 1
+    else:
+        current_max_id_post = max(current_collection, key=lambda x: x['id'])
+        new_post_id = current_max_id_post['id'] + 1
     post['id'] = new_post_id
     current_collection.append(post)
     save_to_db(current_collection)
