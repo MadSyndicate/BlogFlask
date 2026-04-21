@@ -15,14 +15,12 @@ def index():
 def add():
     if request.method == 'POST':
         # We will fill this in the next step
-        print(request.form.get('author'))
-        print(request.form.get('title'))
-        print(request.form.get('content'))
         # adding to "db", id handled in post_blog-func
         new_blog_post = {
             'author': request.form.get('author'),
             'title': request.form.get('title'),
-            'content': request.form.get('content')
+            'content': request.form.get('content'),
+            'likes': 0
         }
         result = db_operations.post_blog(new_blog_post)
         print(f'Added new blog_post with id "{result}".')
@@ -39,8 +37,8 @@ def update(post_id):
         return "Post not found", 404
 
     if request.method == 'POST':
-    # Update the post in the JSON file
-    # Redirect back to index
+        # Update the post in the JSON file
+        # Redirect back to index
 
         upd_author = request.form.get('author')
         upd_title = request.form.get('title')
@@ -54,7 +52,18 @@ def update(post_id):
     return render_template('update.html', post=post)
 
 
-@app.route('/delete/<int:post_id>')
+@app.route('/upvote/<int:post_id>', methods=['POST'])
+def upvotes(post_id):
+    post = db_operations.fetch_post_by_id(post_id)
+    if post is None:
+        # Post not found
+        return "Post not found", 404
+    post['likes'] += 1
+    db_operations.update_likes(post_id)
+    return redirect(url_for('index'))
+
+
+@app.route('/delete/<int:post_id>', methods=['POST'])
 def delete(post_id):
     # Find the blog post with the given id and remove it from the list
     # Redirect back to the home page

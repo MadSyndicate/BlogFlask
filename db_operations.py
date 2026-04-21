@@ -35,6 +35,14 @@ def update_post(post_id, author, title, content):
     return post_id
 
 
+def update_likes(post_id):
+    current_collection = get_all_blogs()
+    for post in current_collection:
+        if post.get('id') == post_id:
+            post['likes'] += 1
+    save_to_db(current_collection)
+    return post_id
+
 
 def post_blog(post):
     current_collection = get_all_blogs()

@@ -26,19 +26,16 @@ h1 {
     margin: 10px 0;
 }
 
-
 .form-container {
     max-width: 600px;
     margin: 20px auto;
 }
-
 
 form label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
 }
-
 
 form input[type="text"],
 form textarea {
@@ -50,12 +47,10 @@ form textarea {
     font-size: 14px;
 }
 
-
 form textarea {
     min-height: 120px;
     resize: vertical;
 }
-
 
 form input[type="submit"] {
     margin-top: 15px;
@@ -67,7 +62,68 @@ form input[type="submit"] {
     cursor: pointer;
 }
 
-
 form input[type="submit"]:hover {
     background-color: #333;
+}
+
+.btn {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+}
+
+.like-btn {
+    background-color: #E0E0E0;
+}
+
+.like-btn:hover {
+    background-color: #D5D5D5;
+}
+
+.update-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #45A049;
+}
+
+.delete-btn {
+    background-color: #E74C3C;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #C0392B;
+}
+
+.actions {
+    margin-top: 15px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.new-post-form {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.primary-btn {
+    background-color: #2D89EF;
+    color: white;
+    font-size: 16px;
+    padding: 10px 18px;
+    border-radius: 8px;
+}
+
+.primary-btn:hover {
+    background-color: #1B5FA7;
+    transform: translateY(-1px);
 }
